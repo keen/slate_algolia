@@ -20,7 +20,10 @@ and then reinstall your gems
 ```ssh
 bundle install
 ```
-The most simple way to activate this is to add this code to your `config.rb`:
+
+## Configuration
+
+The most simple way to activate the extension is to add this code to your `config.rb`:
 
 ```ruby
 activate :slate_algolia do |options|
@@ -34,8 +37,6 @@ You also need to add a line to the YAML Frontmatter of your Slate docs index. Th
 ```YAML
 algolia_search: true
 ```
-
-## Configuration
 
 There are some additional configurations you can enable:
 
