@@ -1,0 +1,1 @@
+require 'slate_algolia'
