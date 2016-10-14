@@ -4,6 +4,22 @@
 
 ## Installation
 
+If you're not using Bundler, simply install the gem:
+
+```ssh
+gem install slate_algolia
+```
+
+If you are using Bundler, add `slate_algolia` to your Gemfile
+```ruby
+gem slate_algolia
+```
+
+and then reinstall your gems
+
+```ssh
+bundle install
+```
 The most simple way to activate this is to add this code to your `config.rb`:
 
 ```ruby

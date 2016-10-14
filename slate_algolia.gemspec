@@ -5,11 +5,9 @@ Gem::Specification.new do |s|
   s.name        = "slate_algolia"
   s.version     = "0.0.1"
   s.platform    = Gem::Platform::RUBY
-  # s.authors     = ["Your Name"]
-  # s.email       = ["email@example.com"]
-  # s.homepage    = "http://example.com"
-  # s.summary     = %q{A short summary of your extension}
-  # s.description = %q{A longer description of your extension}
+  s.authors     = ["Joe Wegner"]
+  s.email       = ["joe@wegnerdesign.com"]
+  s.summary     = "Quickly and easily index Slate Docs in Algolia"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -17,10 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   # The version of middleman-core your extension depends on
-  s.add_runtime_dependency("middleman-core", [">= 3.3.12"])
-  s.add_runtime_dependency("oga", [">= 1.3.1"])
-  s.add_runtime_dependency("algoliasearch", [">= 1.6.1"])
-  
-  # Additional dependencies
-  # s.add_runtime_dependency("gem-name", "gem-version")
+  s.add_runtime_dependency("middleman-core", ["~> 3.3", ">= 3.3.12"])
+  s.add_runtime_dependency("oga", ["~> 1.3", ">= 1.3.1"])
+  s.add_runtime_dependency("algoliasearch", ["~> 1.6", ">= 1.6.1"])
 end
