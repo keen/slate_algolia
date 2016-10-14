@@ -5,7 +5,6 @@ require 'slate_algolia/index'
 module Middleman
     module SlateAlgolia
         class Extension < Middleman::Extension
-
             option :parsers, {}, 'Custom tag parsers'
             option :dry_run, false, 'Send data to Algolia or not?'
             option :application_id, '', 'Algolia Application ID'
