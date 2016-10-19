@@ -6,9 +6,8 @@ module Middleman
 
             def initialize(middleman_page, parsers)
                 @middleman_page = middleman_page
-                @page = Oga.parse_html(middleman_page.render({}, {current_page: middleman_page }))
+                @content = Oga.parse_html(middleman_page.render({:layout => false}, {current_page: middleman_page }))
                 @parsers = parsers
-                get_content
                 generate_sections
             end
 
@@ -17,10 +16,6 @@ module Middleman
             end
 
             private
-
-            def get_content
-                @content = @page.css('.content').first
-            end
 
             def generate_sections
                 @sections = []

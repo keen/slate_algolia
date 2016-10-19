@@ -29,6 +29,9 @@ If a maintainer asks you to "rebase" your PR, they're saying that a lot of code 
 ```ssh
 $ git clone https://github.com/keen/slate_algolia.git && cd slate_algolia
 $ bower install
+
+# Run the tests
+bundle exec rspec
 ```
 
 ### Submitting a Pull Request
