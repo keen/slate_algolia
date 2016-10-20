@@ -19,24 +19,28 @@ module Middleman
                 api_key = options.api_key
 
                 app.after_build do |builder|
-                    sitemap.where(:algolia_search.equal => true).all.each do |slate_page|
-                        content_parser = Parser.new(slate_page, tag_parsers)
-
-                        if content_parser.sections.length > 0
-                            index = Index.new(application_id, api_key, dry_run)
-
-                            content_parser.sections.each do |section|
-                                index.queue_object(section)
-                            end
-
-                            index.flush_queue
-                            index.clean_index
-                        end
-                    end
+                    parse_content(application_id, api_key, dry_run)
                 end
             end
 
             private
+
+            def parse_content(application_id, api_key, dry_run, tag_parsers)
+                app.sitemap.where(:algolia_search.equal => true).all.each do |slate_page|
+                    content_parser = Parser.new(slate_page, tag_parsers)
+
+                    if content_parser.sections.length > 0
+                        index = Index.new(application_id, api_key, dry_run)
+
+                        content_parser.sections.each do |section|
+                            index.queue_object(section)
+                        end
+
+                        index.flush_queue
+                        index.clean_index
+                    end
+                end
+            end
 
             def parser_defaults
                 {
