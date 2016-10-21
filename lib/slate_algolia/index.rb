@@ -37,10 +37,8 @@ module Middleman
       end
 
       def flush_queue
-        to_publish = @queue.reject { |obj| obj[:id].nil? }
-
         if @options[:before_index].instance_of?(Proc)
-          to_publish = to_publish.map do |record|
+          @queue = @queue.map do |record|
             new_record = @options[:before_index].call(record)
             if new_record
               new_record
@@ -48,7 +46,11 @@ module Middleman
               record
             end 
           end
+
+          @queue.flatten!
         end
+
+        to_publish = @queue.reject { |obj| obj[:id].nil? }
 
         if @publish
           @index.add_objects(to_publish)
