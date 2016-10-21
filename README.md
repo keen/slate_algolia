@@ -46,8 +46,47 @@ activate :slate_algolia do |options|
   options.api_key        = '1234'  # Algolia API Key
   options.dry_run        = true    # Don't send data to Algolia, but output some log information instead
   options.parsers        = {}      # Custom tag parsers (discussed later in the docs)
+  options.before_index   = nil     # Proc for changing the data model before it is sent to Algolia
 end
 ```
+
+## Changing the Data Model
+
+While the data model built in is pretty well thought-out, everyone's search needs will be different. Some projects of course will need to mold the data model to meet their needs. To do that, you can hook in to the indexing process and modify the records _just before_ they are shipped off to Algolia.
+
+Set it up in your config file:
+
+```ruby
+activate :slate_algolia do |options|
+  options.before_index = proc { |record|
+    # Change the key name for the body to 'content'
+    record[:content] = record[:body]
+    record.delete(:body)
+
+    record
+  }
+end
+```
+
+If you would like to turn a single record into multiple records, simply return an array of records
+
+```ruby
+activate :slate_algolia do |options|
+  options.before_index = proc { |record|
+    # Create a record for each language in the code examples
+    record.permanent_code.map.with_index { |language, code|
+      new_record = record.merge({
+        code: code,
+        language: language
+      })
+      new_record.delete(permanent_code)
+
+      new_record
+    }
+  }
+end
+```
+
 
 ## Custom Tag Parser
 
