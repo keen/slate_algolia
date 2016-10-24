@@ -15,4 +15,5 @@ group :test do
   gem 'rspec'
   gem 'middleman'
   gem 'webmock'
+  gem 'rubocop', require: false
 end
