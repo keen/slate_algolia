@@ -61,14 +61,14 @@ module Middleman
 
           h1: lambda do |node|
             {
-              id: node.get('id'),
+              objectID: node.get('id'),
               title: node.text
             }
           end,
 
           h2: lambda do |node|
             {
-              id: node.get('id'),
+              objectID: node.get('id'),
               title: node.text
             }
           end
