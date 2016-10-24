@@ -1,14 +1,7 @@
-require 'bundler'
-Bundler::GemHelper.install_tasks
+require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
 
-require 'cucumber/rake/task'
+RSpec::Core::RakeTask.new(:spec)
+RuboCop::RakeTask.new(:style)
 
-Cucumber::Rake::Task.new(:cucumber, 'Run features that should pass') do |t|
-  t.cucumber_opts = "--color --tags ~@wip --strict"
-end
-
-require 'rake/clean'
-
-task test: ['cucumber']
-
-task default: :test
+task default: [:spec, :style]

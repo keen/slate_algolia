@@ -30,8 +30,14 @@ If a maintainer asks you to "rebase" your PR, they're saying that a lot of code 
 $ git clone https://github.com/keen/slate_algolia.git && cd slate_algolia
 $ bower install
 
-# Run the tests
-bundle exec rspec
+# Run the specs
+bundle exec rake spec
+
+# Run the style guide
+bundle exec rake style
+
+# Run the full test suite
+bundle exec rake
 ```
 
 ### Submitting a Pull Request

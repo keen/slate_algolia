@@ -1,0 +1,5 @@
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+
+LineLength:
+    Max: 120

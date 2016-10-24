@@ -1,9 +1,8 @@
 module Given
-  ROOT = File.expand_path( '../..', __dir__ )
-  TMP  = File.join( ROOT, 'tmp' )
+  ROOT = File.expand_path('../..', __dir__)
+  TMP  = File.join(ROOT, 'tmp')
 
   class << self
-
     def fixture(fixture)
       cleanup!
 
@@ -12,9 +11,9 @@ module Given
     end
 
     def file(name, content)
-      file_path = File.join( TMP, name )
-      FileUtils.mkdir_p( File.dirname(file_path) )
-      File.open( file_path, 'w' ) do |file|
+      file_path = File.join(TMP, name)
+      FileUtils.mkdir_p(File.dirname(file_path))
+      File.open(file_path, 'w') do |file|
         file.write(content)
       end
     end
