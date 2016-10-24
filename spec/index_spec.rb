@@ -10,6 +10,28 @@ describe Middleman::SlateAlgolia::Index do
     WebMock.reset!
   end
 
+  describe 'initialize' do
+    it 'creates an Algolia Index with the specified name' do
+      expect(Algolia::Index).to receive(:new).with('test')
+
+      Middleman::SlateAlgolia::Index.new(
+        application_id: '',
+        api_key: '',
+        name: 'test'
+      )
+    end
+
+    it 'uses the defined API keys for the Algolia Index' do
+      expect(Algolia).to receive(:init).with(application_id: 'id', api_key: 'key').and_call_original
+
+      Middleman::SlateAlgolia::Index.new(
+        application_id: 'id',
+        api_key: 'key',
+        name: ''
+      )
+    end
+  end
+
   describe 'flush_queue' do
     it 'calls before_index for each record' do
       dbl = double

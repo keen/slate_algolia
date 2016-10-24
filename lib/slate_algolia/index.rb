@@ -12,7 +12,7 @@ module Middleman
         Algolia.init application_id: @options[:application_id],
                      api_key: @options[:api_key]
 
-        @index = Algolia::Index.new('API Docs')
+        @index = Algolia::Index.new(options[:name])
         @queue = []
       end
 
