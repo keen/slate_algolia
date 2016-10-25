@@ -54,24 +54,29 @@ module Middleman
 
               section[code_type][languages.first.to_sym] = node.text
             end
+
+            section
           end,
 
-          blockquote: lambda do |node, section|
+          blockquote: lambda do |node, section, _page|
             section[:annotations] = [] unless section[:annotations]
             section[:annotations].push(node.text)
+            section
           end,
 
-          h1: lambda do |node|
+          h1: lambda do |node, _section, _page|
             {
               objectID: node.get('id'),
-              title: node.text
+              title: node.text,
+              body: ''
             }
           end,
 
-          h2: lambda do |node|
+          h2: lambda do |node, _section, _page|
             {
               objectID: node.get('id'),
-              title: node.text
+              title: node.text,
+              body: ''
             }
           end
         }
@@ -83,7 +88,7 @@ module Middleman
       def parse_content
         app.sitemap.where(:algolia_search.equal => true).all.each do |slate_page|
           content_parser = Parser.new(slate_page, parsers)
-          next unless content_parser.sections.empty?
+          next if content_parser.sections.empty?
 
           content_parser.sections.each do |section|
             index.queue_object(section)

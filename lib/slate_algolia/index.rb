@@ -52,7 +52,7 @@ module Middleman
       def flush_queue
         run_before_index
 
-        to_publish = @queue.reject { |obj| obj[:id].nil? }
+        to_publish = @queue.reject { |obj| obj[:objectID].nil? }
 
         if @publish
           @index.add_objects(to_publish)

@@ -6,9 +6,9 @@ module Middleman
     class Parser
       def initialize(middleman_page, parsers)
         @middleman_page = middleman_page
-        @content = Oga.parse_html(
+        @page = Oga.parse_html(
           middleman_page.render(
-            { layout: false },
+            {},
             { current_page: middleman_page }
           )
         )
@@ -22,15 +22,20 @@ module Middleman
 
       private
 
+      def content
+        @content ||= @page.css('.content').first
+      end
+
       def generate_sections
-        current_section = { title: 'introduction-header' }
+        current_section = {
+          objectID: 'intro',
+          title: 'introduction-header',
+          body: ''
+        }
 
-        @content.children.each do |node|
+        content.children.each do |node|
           next unless node.class == Oga::XML::Element
-
-          current_section = handle_new_section(node, current_section)
-
-          parse_node(node, current_section, @middleman_page)
+          current_section = parse_node(node, current_section, @middleman_page)
         end
 
         sections.push(current_section)
@@ -51,6 +56,7 @@ module Middleman
       end
 
       def parse_node(node, section, page)
+        section = handle_new_section(node, section)
         parser = @parsers[node.name.to_sym] ||
                  method(:default_tag_parser)
 
@@ -65,6 +71,8 @@ module Middleman
         end
 
         section[:body] += node.text
+
+        section
       end
     end
   end

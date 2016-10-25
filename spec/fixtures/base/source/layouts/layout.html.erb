@@ -17,8 +17,6 @@ under the License.
 <!doctype html>
 <html>
   <head>
-ipt_include_tag  "all_nosearch" %>
-    <% end %>
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">

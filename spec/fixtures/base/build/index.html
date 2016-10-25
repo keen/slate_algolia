@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="/images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="/images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+
+<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+
+<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API's documentation.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<blockquote>
+  <p>To authorize, use this code:</p>
+</blockquote>
+
+<p>```ruby
+require 'kittn'</p>
+
+<p>api = Kittn::APIClient.authorize!('meowmeowmeow')
+```</p>
+
+<p>```python
+import kittn</p>
+
+<p>api = kittn.authorize('meowmeowmeow')
+```</p>
+
+<p><code>shell
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+</code></p>
+
+<p>```javascript
+const kittn = require('kittn');</p>
+
+<p>let api = kittn.authorize('meowmeowmeow');
+```</p>
+
+<blockquote>
+  <p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+</blockquote>
+
+<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+
+<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+
+<p><code>Authorization: meowmeowmeow</code></p>
+
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
+
+<h1 id="kittens">Kittens</h1>
+
+<h2 id="get-all-kittens">Get All Kittens</h2>
+
+<p>```ruby
+require 'kittn'</p>
+
+<p>api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+```</p>
+
+<p>```python
+import kittn</p>
+
+<p>api = kittn.authorize('meowmeowmeow')
+api.kittens.get()
+```</p>
+
+<p><code>shell
+curl "http://example.com/api/kittens"
+  -H "Authorization: meowmeowmeow"
+</code></p>
+
+<p>```javascript
+const kittn = require('kittn');</p>
+
+<p>let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+```</p>
+
+<blockquote>
+  <p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<p><code>json
+[
+  {
+    "id": 1,
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Max",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
+  }
+]
+</code></p>
+
+<p>This endpoint retrieves all kittens.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code>GET http://example.com/api/kittens</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>include_cats</td>
+      <td>false</td>
+      <td>If set to true, the result will also include cats.</td>
+    </tr>
+    <tr>
+      <td>available</td>
+      <td>true</td>
+      <td>If set to false, the result will include kittens that have already been adopted.</td>
+    </tr>
+  </tbody>
+</table>
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
+
+<p>```ruby
+require 'kittn'</p>
+
+<p>api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```</p>
+
+<p>```python
+import kittn</p>
+
+<p>api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
+```</p>
+
+<p><code>shell
+curl "http://example.com/api/kittens/2"
+  -H "Authorization: meowmeowmeow"
+</code></p>
+
+<p>```javascript
+const kittn = require('kittn');</p>
+
+<p>let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.get(2);
+```</p>
+
+<blockquote>
+  <p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<p><code>json
+{
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
+}
+</code></p>
+
+<p>This endpoint retrieves a specific kitten.</p>
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+<h3 id="http-request-1">HTTP Request</h3>
+
+<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>The ID of the kitten to retrieve</td>
+    </tr>
+  </tbody>
+</table>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400</td>
+      <td>Bad Request – Your request sucks</td>
+    </tr>
+    <tr>
+      <td>401</td>
+      <td>Unauthorized – Your API key is wrong</td>
+    </tr>
+    <tr>
+      <td>403</td>
+      <td>Forbidden – The kitten requested is hidden for administrators only</td>
+    </tr>
+    <tr>
+      <td>404</td>
+      <td>Not Found – The specified kitten could not be found</td>
+    </tr>
+    <tr>
+      <td>405</td>
+      <td>Method Not Allowed – You tried to access a kitten with an invalid method</td>
+    </tr>
+    <tr>
+      <td>406</td>
+      <td>Not Acceptable – You requested a format that isn't json</td>
+    </tr>
+    <tr>
+      <td>410</td>
+      <td>Gone – The kitten requested has been removed from our servers</td>
+    </tr>
+    <tr>
+      <td>418</td>
+      <td>I'm a teapot</td>
+    </tr>
+    <tr>
+      <td>429</td>
+      <td>Too Many Requests – You're requesting too many kittens! Slow down!</td>
+    </tr>
+    <tr>
+      <td>500</td>
+      <td>Internal Server Error – We had a problem with our server. Try again later.</td>
+    </tr>
+    <tr>
+      <td>503</td>
+      <td>Service Unavailable – We're temporarially offline for maintanance. Please try again later.</td>
+    </tr>
+  </tbody>
+</table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

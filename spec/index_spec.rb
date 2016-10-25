@@ -45,11 +45,11 @@ describe Middleman::SlateAlgolia::Index do
         end
       )
 
-      index.queue_object(id: 1)
-      index.queue_object(id: 2)
+      index.queue_object(objectID: 1)
+      index.queue_object(objectID: 2)
 
-      expect(dbl).to receive(:verify).with(id: 1)
-      expect(dbl).to receive(:verify).with(id: 2)
+      expect(dbl).to receive(:verify).with(objectID: 1)
+      expect(dbl).to receive(:verify).with(objectID: 2)
 
       index.flush_queue
     end
@@ -60,18 +60,18 @@ describe Middleman::SlateAlgolia::Index do
         api_key: '',
         dry_run: false,
         before_index: proc do |record|
-          { id: record[:id] * 2 }
+          { objectID: record[:objectID] * 2 }
         end
       )
 
-      index.queue_object(id: 1)
-      index.queue_object(id: 2)
+      index.queue_object(objectID: 1)
+      index.queue_object(objectID: 2)
 
       expect(index.instance_variable_get('@index')).to receive(:add_objects)
         .with(
           [
-            { id: 2 },
-            { id: 4 }
+            { objectID: 2 },
+            { objectID: 4 }
           ]
         )
 
@@ -84,20 +84,20 @@ describe Middleman::SlateAlgolia::Index do
         api_key: '',
         dry_run: false,
         before_index: proc do |record|
-          [record, { id: record[:id] * 4 }]
+          [record, { objectID: record[:objectID] * 4 }]
         end
       )
 
-      index.queue_object(id: 1)
-      index.queue_object(id: 2)
+      index.queue_object(objectID: 1)
+      index.queue_object(objectID: 2)
 
       expect(index.instance_variable_get('@index')).to receive(:add_objects)
         .with(
           [
-            { id: 1 },
-            { id: 4 },
-            { id: 2 },
-            { id: 8 }
+            { objectID: 1 },
+            { objectID: 4 },
+            { objectID: 2 },
+            { objectID: 8 }
           ]
         )
 
@@ -114,14 +114,14 @@ describe Middleman::SlateAlgolia::Index do
         end
       )
 
-      index.queue_object(id: 1)
-      index.queue_object(id: 2)
+      index.queue_object(objectID: 1)
+      index.queue_object(objectID: 2)
 
       expect(index.instance_variable_get('@index')).to receive(:add_objects)
         .with(
           [
-            { id: 1 },
-            { id: 2 }
+            { objectID: 1 },
+            { objectID: 2 }
           ]
         )
 
