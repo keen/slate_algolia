@@ -9,6 +9,7 @@ module Middleman
       option :parsers, {}, 'Custom tag parsers'
       option :dry_run, false, 'Send data to Algolia or not?'
       option :application_id, '', 'Algolia Application ID'
+      option :index_name, 'API Docs', 'Name for the Algolia Index'
       option :api_key, '', 'Algolia API Key'
       option :before_index, nil, 'A block to run on each record before it is sent to the index'
 
@@ -27,6 +28,7 @@ module Middleman
         @index ||= Index.new(
           application_id: options.application_id,
           api_key: options.api_key,
+          name: options.index_name,
           dry_run: options.dry_run,
           before_index: options.before_index
         )

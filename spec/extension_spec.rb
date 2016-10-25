@@ -5,11 +5,12 @@ describe Middleman::SlateAlgolia::Extension do
     :application_id,
     :api_key,
     :dry_run,
+    :index_name,
     :parsers,
     :before_index
   )
 
-  default_options = ConfigOptions.new('', '', false, {}, nil)
+  default_options = ConfigOptions.new('', '', false, 'API Docs', {}, nil)
 
   before :each do
     Given.fixture 'base'
