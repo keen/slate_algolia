@@ -9,9 +9,8 @@ Gem::Specification.new do |s|
   s.email       = ['joe@wegnerdesign.com']
   s.summary     = 'Quickly and easily index Slate Docs in Algolia'
 
-  s.files         = `git ls-files`.split('\n')
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split('\n')
-  s.executables   = `git ls-files -- bin/*`.split('\n').map { |f| File.basename(f) }
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- spec/*`.split("\n")
   s.require_paths = ['lib']
 
   # The version of middleman-core your extension depends on
