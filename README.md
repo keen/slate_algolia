@@ -87,6 +87,22 @@ activate :slate_algolia do |options|
 end
 ```
 
+## Filtering Deletes
+
+`slate_algolia` has automatic cleanup built in - meaning that after indexing new content, it will look through Algolia for any content that exists there but **does not** exist in the current content. It will remove those items, assuming they have been removed from the active content. However, you may not want to delete all of your unmatched records - perhaps they serve as a good synonym, or perhaps you index more than just slate docs in that Algolia index. There is a hook option you can use the filter out records from being deleted.
+
+```ruby
+active :slate_algolia do |options|
+  options.filter_deletes = proc { |record|
+    if record['category'] == 'API Docs'
+      true # Truthy values will be deleted
+    else
+      false # Non-Truthy values will be ignored
+    end
+  }
+end
+```
+
 
 ## Custom Tag Parser
 
