@@ -7,7 +7,8 @@ describe Middleman::SlateAlgolia::Extension do
     :dry_run,
     :index_name,
     :parsers,
-    :before_index
+    :before_index,
+    :filter_deletes
   )
 
   default_options = ConfigOptions.new('', '', false, 'API Docs', {}, nil)

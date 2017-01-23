@@ -12,6 +12,7 @@ module Middleman
       option :index_name, 'API Docs', 'Name for the Algolia Index'
       option :api_key, '', 'Algolia API Key'
       option :before_index, nil, 'A block to run on each record before it is sent to the index'
+      option :filter_deletes, nil, 'A block to run on each record before it is deleted from the index'
 
       def initialize(app, options_hash = {}, &block)
         super
@@ -30,7 +31,8 @@ module Middleman
           api_key: options.api_key,
           name: options.index_name,
           dry_run: options.dry_run,
-          before_index: options.before_index
+          before_index: options.before_index,
+          filter_deletes: options.filter_deletes
         )
       end
 

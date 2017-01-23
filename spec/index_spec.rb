@@ -128,4 +128,36 @@ describe Middleman::SlateAlgolia::Index do
       index.flush_queue
     end
   end
+
+  describe 'clean_index' do
+    it 'selects records using the :filter_deletes hook' do
+      index = Middleman::SlateAlgolia::Index.new(
+        application_id: '',
+        api_key: '',
+        dry_run: false,
+        filter_deletes: proc do |record|
+          record['objectID'] == "1"
+        end
+      )
+
+      instance_index = index.instance_variable_get('@index')
+
+      expect(instance_index).to receive(:delete_objects)
+        .with(['1'])
+      allow(instance_index).to receive(:browse) {
+        {
+          'hits' => [
+            {
+              'objectID' => '1'
+            },
+            {
+              'objectID' => '2'
+            }
+          ]
+        }
+      }
+        
+      index.clean_index
+    end
+  end
 end
