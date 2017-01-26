@@ -24,7 +24,11 @@ module Middleman
 
       def clean_index
         old_content = @index.browse['hits'].reject do |hit|
-          @published.any? { |entry| entry[:id] == hit['id'] }
+          @published.any? { |entry| entry[:id] == hit['objectID'] }
+        end
+
+        if @options[:filter_deletes].instance_of?(Proc)
+          old_content = run_filter_delete(old_content)
         end
 
         if @publish
@@ -47,6 +51,10 @@ module Middleman
         end
 
         @queue.flatten!
+      end
+
+      def run_filter_delete(all_records)
+        return all_records.select(&@options[:filter_deletes])
       end
 
       def flush_queue
