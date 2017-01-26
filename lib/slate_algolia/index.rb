@@ -24,7 +24,7 @@ module Middleman
 
       def clean_index
         old_content = @index.browse['hits'].reject do |hit|
-          @published.any? { |entry| entry[:id] == hit['objectID'] }
+          @published.any? { |entry| entry[:objectID] == hit['objectID'] }
         end
 
         if @options[:filter_deletes].instance_of?(Proc)

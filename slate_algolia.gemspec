@@ -3,7 +3,7 @@ $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'slate_algolia'
-  s.version     = '1.1.0'
+  s.version     = '1.1.1'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Joe Wegner']
   s.email       = ['joe@wegnerdesign.com']
