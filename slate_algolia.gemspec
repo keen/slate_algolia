@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   # The version of middleman-core your extension depends on
-  s.add_runtime_dependency('middleman-core', ['~> 3.3', '>= 3.3.12'])
+  s.add_runtime_dependency('middleman-core', ['~> 4.0', '>= 4.0.0'])
   s.add_runtime_dependency('oga', ['~> 1.3', '>= 1.3.1'])
   s.add_runtime_dependency('algoliasearch', ['~> 1.12', '>= 1.12.5'])
 end

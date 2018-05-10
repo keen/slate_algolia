@@ -88,7 +88,8 @@ module Middleman
       private
 
       def parse_content
-        app.sitemap.where(:algolia_search.equal => true).all.each do |slate_page|
+        app.sitemap.resources.each do |slate_page|
+          next unless slate_page.data[:algolia_search]
           content_parser = Parser.new(slate_page, parsers)
           next if content_parser.sections.empty?
 
